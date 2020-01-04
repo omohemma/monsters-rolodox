@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CardList } from "./components/card-list/card-list.component";
+import { SearchBox } from "./components/search-box/search-box.component";
 import "./App.css";
 
 //Class 'App' extends React.Component Library
@@ -28,24 +29,35 @@ class App extends Component {
       .then(users => this.setState({ monsters: users }));
   }
 
+  //Custom method
+  handleChange = e => {
+    this.setState({ searchField: e.target.value });
+  };
+
   // React Component receieves its state(monsters) in an attribue-like form called props
   render() {
     const { monsters, searchField } = this.state;
 
+    // Don't mutate state of parent component because  of unidirectional data flow
     const filteredMonsters = monsters.filter(monster =>
       monster.name.toLowerCase().includes(searchField.toLowerCase())
     );
 
-    return (
-      <div className="App">
-        <input
-          type="search"
-          placeholder="search monsters"
-          onChange={e => this.setState({ searchField: e.target.value })}
-        />
-        <CardList monsters={filteredMonsters} />
-      </div>
-    );
+    if (this.state.monsters.length === 0) {
+      return <h1 className="text-center">App is Loading...</h1>;
+    } else {
+      return (
+        <div className="App">
+          <h1>Monsters Rolodox</h1>
+          <SearchBox
+            placeholder="Search Monsters"
+            handleChange={this.handleChange}
+          />
+
+          <CardList monsters={filteredMonsters} />
+        </div>
+      );
+    }
   }
 }
 
