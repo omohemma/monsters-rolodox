@@ -1,7 +1,7 @@
 {
   "name": "monsters-rolodox",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "http://omohemma.github.io/monsters-rolodox",
   "dependencies": {
     "gh-pages": "^2.1.1",
