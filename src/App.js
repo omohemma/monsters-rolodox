@@ -33,8 +33,8 @@ class App extends Component {
   handleChange = e => {
     this.setState({ searchField: e.target.value });
   };
-
-  // React Component receieves its state(monsters) in an attribue-like form called props
+ 
+  // React Component receieves its state(monsters) in an attribute-like form called props
   render() {
     const { monsters, searchField } = this.state;
 
